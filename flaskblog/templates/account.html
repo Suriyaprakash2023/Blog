@@ -1,0 +1,48 @@
+{%  extends 'base.html'%}
+{% block title %} {{title}} {% endblock title %}
+
+{% block style %} <link rel="stylesheet" href="{{url_for('static',filename='css/about.css')}}">{% endblock style %}
+
+{% block content %}
+<div class="content-section">
+    <div class="media">
+        <img src="{{image_file}}" alt="This is User Profile" class="rounded-circle account-img">
+        <div class="media-body">
+            <h2 class="account-heading">{{current_user.username}}</h2>
+            <p class="text-secondary">{{current_user.email}}</p>
+        </div>
+    </div>
+</div>    
+<div class="register-container">
+    <h2>Update Details</h2>
+    <form action = "/register"  method="POST" enctype="multipart/form-data">
+        {{ form.hidden_tag() }} <!-- This is a required hidden field for CSRF protection -->
+        <div class="form-group">
+            {{ form.username(size=20, class="form-control") }} 
+            {% if form.username.errors %}
+
+            {% endif %}
+            <br>
+        </div>
+        <div class="form-group">
+            {{ form.email(size=20, class="form-control") }} <br>
+        </div>
+        <div class="form-group">
+            {{form.picture.lable}}
+            {{form.picture(class="form-control-file")}}
+            {% if form.picture.error %}
+                {% for error in form.picture.error %}
+                    <span class="text-danger">{{error}}</span>
+                {% endfor %}
+            {% endif %}
+        </div>
+        
+        <div class="button-group">
+            {{ form.submit(class="btn btn-primary") }} <br> <br>
+            <input type = "reset" value = "Reset" class="btn btn-outline-info">
+        </div>
+    </form>
+</div>
+
+
+{% endblock content %}

@@ -1,0 +1,36 @@
+{%  extends 'base.html'%}
+
+{% block title %} {{title}} {% endblock title %}
+{% block style %} <link rel="stylesheet" href="{{url_for('static',filename='css/login.css')}}">{% endblock style %}
+
+
+{% block content %}
+<div class="login-container">
+    <h2>Welcome to Login Page</h2>
+
+    <form action = ""  method="POST">
+        {{ form.hidden_tag() }} <!-- This is a required hidden field for CSRF protection -->
+        <div class="form-group">
+            {{ form.email(size=20, class="form-control") }}
+        </div>
+        <div class="form-group">
+            {{ form.password(size=20, class="form-control") }} 
+        </div> 
+    <div><small class="text-muted ml-2"><a class="float-right" href="{{url_for('reset_request')}}">Forgot Password</a> </small></div>
+        <br>
+        <div>
+        {{ form.submit (class="btn btn-primary") }} 
+       
+        </div>
+        <br> 
+        <div>
+        <input type = "reset" value = "RESET" class="btn btn-primary">
+        </div> <br>
+    </form>
+
+    <div class="dark"> Don't have an account?<a href = "{{url_for('register')}}" > Login </a>  </div><br>
+</div>
+
+
+
+{% endblock content %}

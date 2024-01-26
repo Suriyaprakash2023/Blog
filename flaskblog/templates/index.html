@@ -1,0 +1,22 @@
+{%  extends 'base.html'%}
+
+{% block title %} Home  {% endblock title %}
+{% block style %} <link rel="stylesheet" href="{{url_for('static',filename='css/index.css')}}">{% endblock style %}
+<!----    <img class="rounded-circle article-img" src="{{url_for('static',filename='profile_pics/'+post.author.image_file)}}" alt="User Profile Image">  ----->
+{% block content %}
+{% for post in posts %}
+<article class="media content-section">
+
+    <div class="midea-body">
+        <div class="atricle-media">
+            <a href="#" class="mr-2">{{post.author.username}} </a>
+            <small class="text-muted">{{post.date_posted.strftime('%Y-%m-%d')}}</small>
+        </div>
+        <hr>
+        <h2><a href="{{url_for('post',post_id=post.id)}}" class="artical-title">{{post.title}}</a></h2>
+        <p class="atical-content">{{post.content}}</p>
+    </div>    
+</article>
+   
+{% endfor %}
+{% endblock content %}

@@ -1,0 +1,36 @@
+{%  extends 'base.html'%}
+
+{% block title %} {{title}} {% endblock title %}
+{% block style %} <link rel="stylesheet" href="{{url_for('static',filename='css/login.css')}}">{% endblock style %}
+
+
+{% block content %}
+<div class="content-section">
+    <form action = ""  method="POST">
+        {{ form.hidden_tag() }} <!-- This is a required hidden field for CSRF protection -->
+        <fieldset class="form-group">
+            <legend class="broder-bottom mb-4">Enter the New Password </legend>
+        <div class="form-group">
+         {{ form.email.label( class="form-control-label") }}
+        </div>
+         <div class="form-group">
+            {{ form.email( class="form-control-label") }}
+         </div>
+         {% if form.email.errors %}
+            {{form.email(class="form-control form-control-lg is-invalid")}}
+        <div class="invalid-feedback">
+            {% for error in form.email.errors %}
+            <span>{{error}}</span>
+            {% endfor %}
+        </div>
+         {% endif%}
+
+        </div>
+        
+        <div>
+        {{ form.submit (class="btn btn-outline-info") }} 
+        </div>
+        
+    </fieldset>
+    </form>
+{% endblock content %}
